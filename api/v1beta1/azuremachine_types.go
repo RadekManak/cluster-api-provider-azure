@@ -132,6 +132,12 @@ type AzureMachineSpec struct {
 	// +optional
 	DNSServers []string `json:"dnsServers,omitempty"`
 
+	// DisableBootstrappingVMExtension disables CAPZ Bootstrapping VM extension.
+	// Its role is to detect and report Kubernetes bootstrap failure or success.
+	// Use this setting if VMExtensions are not supported by your image.
+	// +optional
+	DisableBootstrappingVMExtension *bool `json:"disableBootstrappingVMExtension,omitempty"`
+
 	// VMExtensions specifies a list of extensions to be added to the virtual machine.
 	// +optional
 	VMExtensions []VMExtension `json:"vmExtensions,omitempty"`

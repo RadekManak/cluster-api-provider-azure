@@ -238,6 +238,12 @@ spec:
                     - storageAccountType
                     type: object
                 type: object
+              disableBootstrappingVMExtension:
+                description: |-
+                  DisableBootstrappingVMExtension disables CAPZ Bootstrapping VM extension.
+                  Its role is to detect and report Kubernetes bootstrap failure or success.
+                  Use this setting if VMExtensions are not supported by your image.
+                type: boolean
               dnsServers:
                 description: DNSServers adds a list of DNS Server IP addresses to
                   the VM NICs.

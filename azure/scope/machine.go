@@ -391,7 +391,11 @@ func (m *MachineScope) VMExtensionSpecs() []azure.ResourceSpecGetter {
 	}
 
 	cpuArchitectureType, _ := m.cache.VMSKU.GetCapability(resourceskus.CPUArchitectureType)
-	bootstrapExtensionSpec := azure.GetBootstrappingVMExtension(m.AzureMachine.Spec.OSDisk.OSType, m.CloudEnvironment(), m.Name(), cpuArchitectureType)
+
+	var bootstrapExtensionSpec *azure.ExtensionSpec
+	if !ptr.Deref(m.AzureMachine.Spec.DisableBootstrappingVMExtension, false) {
+		bootstrapExtensionSpec = azure.GetBootstrappingVMExtension(m.AzureMachine.Spec.OSDisk.OSType, m.CloudEnvironment(), m.Name(), cpuArchitectureType)
+	}
 
 	if bootstrapExtensionSpec != nil {
 		extensionSpecs = append(extensionSpecs, &vmextensions.VMExtensionSpec{
